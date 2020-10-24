@@ -65,7 +65,7 @@ int main() {
             x2=cd[j];
             y2=cd[j+1];}
         }   }
-    printf("Iki nokta arasi en buyuk uzaklik=%f\nKoordinatlar=(%d,%d) (%d,%d)\n",ebu,x,y,x2,y2);
+    printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%d,%d)-(%d,%d)\n",ebu,x,y,x2,y2);
 
     return 0;
 }
