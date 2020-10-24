@@ -55,14 +55,13 @@ int main() {
 
     printf("\n");
     float ebu=sqrt(pow(cd[j+2]-cd[j],2)+pow(cd[j+3]-cd[j+1],2));
-    printf("ebu=%f\n",ebu);
     for(int i=0;i<size;i+=2)   {
     for(int j=i+2;j<size;j+=2)   {
         if(sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2))>ebu){
             ebu=sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2));}
-        }
-    printf("\n");   }
-    printf("ebu=%f\n",ebu);
+        }   }
+    printf("ebu=%f",ebu);
 
     return 0;
 }
+
