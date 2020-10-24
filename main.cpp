@@ -47,10 +47,11 @@ int main() {
     int size=get_size()-1;
     int cd[size];
     int j=0;
+    int x,y,x2,y2;
     read_coordinate(cd);
     for (int i = 0; i <size ; i+=2) {
-        printf("x=%d ",cd[i]);
-        printf("y=%d ",cd[i+1]);
+        printf("x%d=%d ",i,cd[i]);
+        printf("y%d=%d \n",i,cd[i+1]);
     }
 
     printf("\n");
@@ -58,9 +59,13 @@ int main() {
     for(int i=0;i<size;i+=2)   {
     for(int j=i+2;j<size;j+=2)   {
         if(sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2))>ebu){
-            ebu=sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2));}
+            ebu=sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2));
+            x=cd[i];
+            y=cd[i+1];
+            x2=cd[j];
+            y2=cd[j+1];}
         }   }
-    printf("ebu=%f",ebu);
+    printf("Iki nokta arasi en buyuk uzaklik=%f\nKoordinatlar=(%d,%d) (%d,%d)\n",ebu,x,y,x2,y2);
 
     return 0;
 }
