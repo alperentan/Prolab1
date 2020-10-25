@@ -72,7 +72,7 @@ int main() {
         enuzakucuncuuzunluk=sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2));
         enuzakucuncunoktax1=cd[i];
         enuzakucuncunoktay1=cd[i+1];}}
-    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)",x,y,x2,y2,enuzakucuncunoktax1,enuzakucuncunoktay1);
+    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)\n",x,y,x2,y2,enuzakucuncunoktax1,enuzakucuncunoktay1);
 
     return 0;
 }
