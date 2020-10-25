@@ -66,7 +66,13 @@ int main() {
             y2=cd[j+1];}
         }   }
     printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%d,%d)-(%d,%d)\n",ebu,x,y,x2,y2);
+    int enuzakucuncunoktax1,enuzakucuncunoktay1,enuzakucuncuuzunluk=0;
+    for(int i=0;i<size;i+=2){
+    if(sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2))>enuzakucuncuuzunluk){
+        enuzakucuncuuzunluk=sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2));
+        enuzakucuncunoktax1=cd[i];
+        enuzakucuncunoktay1=cd[i+1];}}
+    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)",x,y,x2,y2,enuzakucuncunoktax1,enuzakucuncunoktay1);
 
     return 0;
 }
-
