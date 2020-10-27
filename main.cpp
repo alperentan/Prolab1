@@ -66,13 +66,36 @@ int main() {
             y2=cd[j+1];}
         }   }
     printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%d,%d)-(%d,%d)\n",ebu,x,y,x2,y2);
-    int enuzakucuncunoktax1,enuzakucuncunoktay1,enuzakucuncuuzunluk=0;
+    int x3,y3,enuzakucuncuuzunluk=0;
     for(int i=0;i<size;i+=2){
     if(sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2))>enuzakucuncuuzunluk){
         enuzakucuncuuzunluk=sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2));
-        enuzakucuncunoktax1=cd[i];
-        enuzakucuncunoktay1=cd[i+1];}}
-    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)\n",x,y,x2,y2,enuzakucuncunoktax1,enuzakucuncunoktay1);
+        x3=cd[i];
+        y3=cd[i+1];}}
+    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)\n",x,y,x2,y2,x3,y3);
+    float egri1=0;
+    float egri2=0;
+    float sabit1=0;
+    float sabit2=0;
+    float orta1x=0;
+    float orta1y=0;
+    float orta2x=0;
+    float orta2y=0;
+    float mer_x=0;
+    float mer_y=0;
+    egri1=(y2-y)/(x2-x);
+    egri2=(y2-y3)/(x2-x3);
+    orta1x=(x+x2)/2;
+    orta1y=(y+y2)/2;
+    orta2x=(x2+x3)/2;
+    orta2y=(y2+y3)/2;
+
+    sabit1=orta1y+(1/egri1)*orta1x;
+    sabit2=orta2y+(1/egri2)*orta2x;
+    //printf("%f %f\n",sabit1,sabit2);
+    mer_x=(sabit2-sabit1)/(((x3-x2)/(y2-y3))+((x2-x)/(y-y2)));
+    mer_y=(-1/egri2)*mer_x+sabit2;
+    printf("Cemberin merkezi= x:%f y:%f",mer_x,mer_y);
 
     return 0;
 }
