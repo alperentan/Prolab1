@@ -47,14 +47,26 @@ int main() {
     int size=get_size()-1;
     int cd[size];
     int j=0;
-    int x,y,x2,y2;
+    float x,y,x2,y2;
     read_coordinate(cd);
     for (int i = 0; i <size ; i+=2) {
         printf("x%d=%d ",i,cd[i]);
         printf("y%d=%d \n",i,cd[i+1]);
     }
-
     printf("\n");
+    float mer_x=0;
+    float mer_y=0;
+    float yaricap=0;
+    if(size==2){
+        printf("Cemberin merkezi=(%d %d)\nCemberin yaricapi=0(nokta)\n",cd[0],cd[1]);
+    }
+    else if(size==4)   {
+    mer_x=(cd[0]+cd[2])/2.0;
+    mer_y=(cd[1]+cd[3])/2.0;
+    yaricap=sqrt(pow(cd[2]-mer_x,2)+pow(cd[3]-mer_y,2));
+    printf("Cemberin merkezi=(%f %f)\nCemberin yaricapi=%f\n",mer_x,mer_y,yaricap);   }
+
+    else{
     float ebu=sqrt(pow(cd[j+2]-cd[j],2)+pow(cd[j+3]-cd[j+1],2));
     for(int i=0;i<size;i+=2)   {
     for(int j=i+2;j<size;j+=2)   {
@@ -65,14 +77,18 @@ int main() {
             x2=cd[j];
             y2=cd[j+1];}
         }   }
-    printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%d,%d)-(%d,%d)\n",ebu,x,y,x2,y2);
-    int x3,y3,enuzakucuncuuzunluk=0;
+    printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%f,%f)-(%f,%f)\n",ebu,x,y,x2,y2);
+    float x3,y3,enuzakucuncuuzunluk=0;
     for(int i=0;i<size;i+=2){
     if(sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2))>enuzakucuncuuzunluk){
         enuzakucuncuuzunluk=sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2));
         x3=cd[i];
         y3=cd[i+1];}}
-    printf("(%d,%d)-(%d,%d)'ya en uzak ucuncu nokta=(%d,%d)\n",x,y,x2,y2,x3,y3);
+    printf("(%f,%f)-(%f,%f)'ya en uzak ucuncu nokta=(%f,%f)\n",x,y,x2,y2,x3,y3);
+    mer_x=(x2+x)/2;
+    mer_y=(y2+y)/2;
+    yaricap=sqrt(pow(x-mer_x,2)+pow(y-mer_y,2));
+    if((sqrt(pow(x3-mer_x,2)+pow(y3-mer_y,2)))>yaricap)   {
     float egri1=0;
     float egri2=0;
     float sabit1=0;
@@ -81,8 +97,6 @@ int main() {
     float orta1y=0;
     float orta2x=0;
     float orta2y=0;
-    float mer_x=0;
-    float mer_y=0;
     egri1=(y2-y)/(x2-x);
     egri2=(y2-y3)/(x2-x3);
     orta1x=(x+x2)/2;
@@ -95,7 +109,10 @@ int main() {
     //printf("%f %f\n",sabit1,sabit2);
     mer_x=(sabit2-sabit1)/(((x3-x2)/(y2-y3))+((x2-x)/(y-y2)));
     mer_y=(-1/egri2)*mer_x+sabit2;
-    printf("Cemberin merkezi= x:%f y:%f",mer_x,mer_y);
+    yaricap=sqrt(pow(x-mer_x,2)+pow(y-mer_y,2));
+    printf("Cemberin merkezi= x:%f y:%f\nCemberin yaricapi=%f\n",mer_x,mer_y,yaricap);   }
+    else   {
+        printf("Cemberin merkezi= x:%f y:%f\nCemberin yaricapi=%f\n",mer_x,mer_y,yaricap);   }   }
 
     return 0;
 }
