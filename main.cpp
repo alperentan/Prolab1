@@ -1,89 +1,102 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <math.h>
-
-char *file_path="C:\\Users\\tanal\\Desktop\\den.txt";
+#include <graphics.h>
+struct point{
+int x;
+int y;
+};
 int get_size(){
-    int i=0;
-    char cr;
-    FILE *fp=fopen(file_path,"r");
-    if(fp!=NULL){
-        while(!feof(fp)){
-            cr=fgetc(fp);
-            if(cr!='{'&&cr!='}'&&cr!=','){
-                i++;
-            }
-        }
+    FILE *f=fopen("C:\\Users\\tanal\\Desktop\\den.txt","r");
 
-        fclose(fp);
-        return i;
-    }
-    else{
-        printf("A problem occurs");
+if(f!=NULL){
+   int i=0;
+   while(!feof(f)){
+
+       if(fgetc(f)!='{'&&fgetc(f)!='}'){
+          i++;
+       }
+   }
+   fclose(f);
+   return i;
+}
+else{
+    printf("File does not exist");
+}
+}
+void readfile(char *coordinate){
+FILE *f=fopen("C:\\Users\\tanal\\Desktop\\den.txt","r");
+int i=0;
+if(f!=NULL){
+   while(!feof(f)){
+       char c;
+        c=fgetc(f);
+       if(c!='{'&&c!='}'){
+          coordinate[i]=c;
+        i++;
+       }
+   }
+   fclose(f);
+}
+else{
+    printf("File does not exist");
+}
+}
+void parse_coordinate(char *coor,struct point pt[],int size){
+char *say;
+    say=strtok(coor," ,");
+    pt[0].x=(float)atoi(say);
+    say = strtok (NULL, " ,");
+    pt[0].y=(float)atoi(say);
+    for (int i = 2; i < size; i+=2) {
+        say = strtok (NULL, " ,");
+        pt[i/2].x=(float)atoi(say);
+        say = strtok (NULL, " ,");
+        pt[i/2].y=(float)atoi(say);
     }
 }
-void read_coordinate(int *crd){
-    int i=0;
-    char cr;
-    FILE *fp=fopen(file_path,"r");
-    if(fp!=NULL){
-        while(!feof(fp)){
-            cr=fgetc(fp);
-            if(cr!='{'&&cr!='}'&&cr!=','){
-                crd[i]=cr-'0';
-                i++;
-            }
-        }
-
-        fclose(fp);
-    }
-    else{
-        printf("A problem occurs");
-    }
-}
-
-int main() {
-    int size=get_size()-1;
-    int cd[size];
-    int j=0;
+int main()
+{   int size=get_size();
+    char coordinate[size];
+    struct point pt[size/2];
+    readfile(coordinate);
+    //printf("%s",coordinate);
+    parse_coordinate(coordinate,pt,size);
     float x,y,x2,y2;
-    read_coordinate(cd);
-    for (int i = 0; i <size ; i+=2) {
-        printf("x%d=%d ",i,cd[i]);
-        printf("y%d=%d \n",i,cd[i+1]);
+    for(int i=0;i<size/2;i++){
+       printf("( %d , %d )",pt[i].x,pt[i].y);
     }
     printf("\n");
     float mer_x=0;
     float mer_y=0;
     float yaricap=0;
     if(size==2){
-        printf("Cemberin merkezi=(%d %d)\nCemberin yaricapi=0(nokta)\n",cd[0],cd[1]);
+        printf("Cemberin merkezi=(%d %d)\nCemberin yaricapi=0(nokta)\n",pt[0].x,pt[0].y);
     }
     else if(size==4)   {
-    mer_x=(cd[0]+cd[2])/2.0;
-    mer_y=(cd[1]+cd[3])/2.0;
-    yaricap=sqrt(pow(cd[2]-mer_x,2)+pow(cd[3]-mer_y,2));
+    mer_x=(pt[0].x+pt[1].x)/2.0;
+    mer_y=(pt[0].y+pt[1].y)/2.0;
+    yaricap=sqrt(pow(pt[1].x-mer_x,2)+pow(pt[1].y-mer_y,2));
     printf("Cemberin merkezi=(%f %f)\nCemberin yaricapi=%f\n",mer_x,mer_y,yaricap);   }
 
     else{
-    float ebu=sqrt(pow(cd[j+2]-cd[j],2)+pow(cd[j+3]-cd[j+1],2));
-    for(int i=0;i<size;i+=2)   {
-    for(int j=i+2;j<size;j+=2)   {
-        if(sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2))>ebu){
-            ebu=sqrt(pow(cd[j]-cd[i],2)+pow(cd[j+1]-cd[i+1],2));
-            x=cd[i];
-            y=cd[i+1];
-            x2=cd[j];
-            y2=cd[j+1];}
+    float ebu=sqrt(pow(pt[1].x-pt[0].x,2)+pow(pt[1].y-pt[0].y,2));
+    for(int i=0;i<size/2;i++)   {
+    for(int j=i+1;j<size/2;j++)   {
+        if(sqrt(pow(pt[j].x-pt[i].x,2)+pow(pt[j].y-pt[i].y,2))>ebu){
+            ebu=sqrt(pow(pt[j].x-pt[i].x,2)+pow(pt[j].y-pt[i].y,2));
+            x=pt[i].x;
+            y=pt[i].y;
+            x2=pt[j].x;
+            y2=pt[j].y;}
         }   }
     printf("Iki nokta arasi en buyuk uzaklik=%f\nEn uzak noktalarin koordinatlari=(%f,%f)-(%f,%f)\n",ebu,x,y,x2,y2);
     float x3,y3,enuzakucuncuuzunluk=0;
-    for(int i=0;i<size;i+=2){
-    if(sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2))>enuzakucuncuuzunluk){
-        enuzakucuncuuzunluk=sqrt(pow(cd[i]-x,2)+pow(cd[i+1]-y,2))+sqrt(pow(cd[i]-x2,2)+pow(cd[i+1]-y2,2));
-        x3=cd[i];
-        y3=cd[i+1];}}
+    for(int i=0;i<size/2;i++){
+    if(sqrt(pow(pt[i].x-x,2)+pow(pt[i].y-y,2))+sqrt(pow(pt[i].x-x2,2)+pow(pt[i].y-y2,2))>enuzakucuncuuzunluk){
+        enuzakucuncuuzunluk=sqrt(pow(pt[i].x-x,2)+pow(pt[i].y-y,2))+sqrt(pow(pt[i].x-x2,2)+pow(pt[i].y-y2,2));
+        x3=pt[i].x;
+        y3=pt[i].y;}}
     printf("(%f,%f)-(%f,%f)'ya en uzak ucuncu nokta=(%f,%f)\n",x,y,x2,y2,x3,y3);
     mer_x=(x2+x)/2;
     mer_y=(y2+y)/2;
@@ -114,5 +127,4 @@ int main() {
     else   {
         printf("Cemberin merkezi= x:%f y:%f\nCemberin yaricapi=%f\n",mer_x,mer_y,yaricap);   }   }
 
-    return 0;
-}
+    return 0;   }
