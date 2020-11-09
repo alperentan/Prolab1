@@ -67,10 +67,10 @@ void draw(int size,struct point *pt){
     pnt[3]=pt[2];
     for(int i =3;i<size;i++){
             pnt[0]=pnt[1];pnt[1]=pnt[2];pnt[2]=pnt[3];pnt[3]=pt[i];
-            double interpole=sqrt(pow(pnt[2].x-pnt[1].x,2)+pow(pnt[2].y-pnt[1].y,2));
-            int temp =(int)interpole;
-            bspl(pnt[0],pnt[1],pnt[2],pnt[3],temp);
-            for(int j =0;j<temp-1;j++){
+            double interpolation=sqrt(pow(pnt[2].x-pnt[1].x,2)+pow(pnt[2].y-pnt[1].y,2));
+            int len =(int)interpolation;
+            bspl(pnt[0],pnt[1],pnt[2],pnt[3],len);
+            for(int j =0;j<len-1;j++){
                putpixel(splinex[j],spliney[j],BLUE);
             }
     }
