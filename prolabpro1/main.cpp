@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <graphics.h>
-char *file_path="C:\\Users\\oguzn\\OneDrive\\Masaüstü\\den.txt";
+char *file_path="C:\\Users\\oguzn\\OneDrive\\MasaÃ¼stÃ¼\\den.txt";
 double splinex[1000];
 double spliney[1000];
 struct point   {
@@ -41,15 +41,16 @@ void parse_coordinate(char *coor,struct point pt[],int size)   {
     pt[0].x=250+(((float)atoi(say))*10);
     say = strtok (NULL, " ,");
     pt[0].y=250-(((float)atoi(say))*10);
-    for (int i = 1; i < size; i++)   {
 
+    for (int i = 1; i < size; i++)   {
 
         say = strtok (NULL, " ,");
         pt[i].x=250+(((float)atoi(say))*10);
         say = strtok (NULL, " ,");
         pt[i].y=250-(((float)atoi(say))*10);
+
          }
-        }
+}
 void bspl(struct point pt1,struct point pt2,struct point pt3,struct point pt4,int u){
 for(int i =0;i<u;i++){
     float division=(float)i/(float)u;
